@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-header">
+            <h2 class="login-title">System <span class="highlight">Login</span></h2>
+            <p class="login-subtitle">Enter your credentials to access the system</p>
+        </div>
+        
+        <form class="login-form" method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
+

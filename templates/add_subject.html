@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Add Subject - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_subject.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="add-subject-header">
+    <h1 class="page-title">Add New <span class="highlight">Subject</span></h1>
+    <p class="page-subtitle">Add a new subject to the database with front and side images</p>
+</div>
+
+<div class="add-subject-form-container">
+    <form method="POST" action="{{ url_for('add_subject') }}" class="add-subject-form" enctype="multipart/form-data">
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-images"></i> Subject Images
+            </h3>
+            
+            <div class="image-upload-grid">
+                <div class="form-group">
+                    <label for="front_image">Front Image</label>
+                    <div class="file-upload">
+                        <input type="file" id="front_image" name="front_image" accept=".jpg,.jpeg,.png" required>
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview"></div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="side_image">Side Image</label>
+                    <div class="file-upload">
+                        <input type="file" id="side_image" name="side_image" accept=".jpg,.jpeg,.png" required>
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <h3 class="section-title">
+                <i class="fas fa-id-card"></i> Subject Metadata
+            </h3>
+            
+            <div class="metadata-grid">
+                <div class="form-group">
+                    <label for="sex">Sex</label>
+                    <select id="sex" name="sex" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="height">Height</label>
+                    <div class="height-input-group">
+                        <div class="height-feet">
+                            <input type="number" id="height_feet" name="height_feet" min="1" max="9" placeholder="ft" required>
+                            <span class="unit-label">ft.</span>
+                        </div>
+                        <div class="height-inches">
+                            <input type="number" id="height_inches" name="height_inches" min="0" max="11" placeholder="in" required>
+                            <span class="unit-label">in.</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="weight">Weight</label>
+                    <div class="weight-input-group">
+                        <input type="number" id="weight" name="weight" min="1" max="999" placeholder="Weight" required>
+                        <span class="unit-label">lbs.</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hair">Hair Color</label>
+                    <select id="hair" name="hair" required>
+                        <option value="Black">Black</option>
+                        <option value="Brown">Brown</option>
+                        <option value="Blonde or Strawberry">Blonde or Strawberry</option>
+                        <option value="Red or Auburn">Red or Auburn</option>
+                        <option value="Gray or Partially Gray">Gray or Partially Gray</option>
+                        <option value="White">White</option>
+                        <option value="Sandy">Sandy</option>
+                        <option value="Bald">Bald</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eyes">Eye Color</label>
+                    <select id="eyes" name="eyes" required>
+                        <option value="Brown">Brown</option>
+                        <option value="Blue">Blue</option>
+                        <option value="Green">Green</option>
+                        <option value="Hazel">Hazel</option>
+                        <option value="Gray">Gray</option>
+                        <option value="Black">Black</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="race">Race</label>
+                    <select id="race" name="race" required>
+                        <option value="White">White</option>
+                        <option value="Black">Black</option>
+                        <option value="Hispanic">Hispanic</option>
+                        <option value="Asian or Pacific Islander">Asian or Pacific Islander</option>
+                        <option value="American Indian or Alaskan Native">American Indian or Alaskan Native</option>
+                        <option value="Unknown">Unknown</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="sex_offender">Sex Offender</label>
+                    <select id="sex_offender" name="sex_offender" required>
+                        <option value="False">No</option>
+                        <option value="True">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="offense">Offense(s)</label>
+                    <textarea id="offense" name="offense" rows="3" placeholder="Enter offense details"></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Add Subject
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/add_subject.js') }}"></script>
+{% endblock %}
+

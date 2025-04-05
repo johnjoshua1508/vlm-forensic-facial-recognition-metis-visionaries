@@ -1,0 +1,68 @@
+/* Settings Page Styles - Futuristic Theme */
+
+.settings-header {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .settings-container {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .settings-section {
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .settings-section:last-child {
+    border-bottom: none;
+  }
+  
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
+  }
+  
+  .section-title i {
+    color: var(--primary-color);
+  }
+  
+  .section-description {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .slider-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+  
+  .slider-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 40px;
+    text-align: center;
+    text-shadow: var(--neon-glow);
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-xl);
+  }
+  
+  

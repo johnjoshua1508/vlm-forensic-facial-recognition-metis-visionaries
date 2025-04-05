@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Remove Subject - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/remove_subject.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="remove-subject-header">
+    <h1 class="page-title">Remove <span class="highlight">Subject</span></h1>
+    <p class="page-subtitle">Remove a subject from the database</p>
+</div>
+
+<div class="remove-subject-form-container">
+    <div class="warning-card">
+        <div class="warning-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="warning-content">
+            <h3>Warning: This action cannot be undone</h3>
+            <p>Removing a subject will delete all associated data, including images and metadata.</p>
+        </div>
+    </div>
+    
+    <form method="POST" action="{{ url_for('remove_subject') }}" class="remove-subject-form">
+        <div class="form-group">
+            <label for="subject_id">
+                <i class="fas fa-id-badge"></i> Subject ID
+            </label>
+            <input type="text" id="subject_id" name="subject_id" placeholder="Enter the subject ID to remove" required>
+        </div>
+        
+        <div class="form-group">
+            <label class="checkbox-label">
+                <input type="checkbox" id="confirm" name="confirm" required>
+                <span class="checkbox-text">I confirm that I want to remove this subject</span>
+            </label>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">
+                <i class="fas fa-user-minus"></i> Remove Subject
+            </button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

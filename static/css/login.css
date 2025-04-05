@@ -1,0 +1,126 @@
+/* Login Page Styles - Futuristic Theme */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  position: relative;
+  z-index: 2;
+}
+
+.login-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--glass-shadow);
+  width: 100%;
+  max-width: 450px;
+  padding: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.5s ease;
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: var(--primary-gradient);
+  box-shadow: var(--neon-glow);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.login-title {
+  font-size: 2rem;
+  margin-bottom: var(--spacing-sm);
+  color: var(--light-color);
+}
+
+.login-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.login-form .form-group {
+  margin-bottom: 0;
+}
+
+.login-form label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  color: var(--light-color);
+  letter-spacing: 0.5px;
+}
+
+.login-form input {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--light-color);
+}
+
+.login-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.login-form .btn {
+  margin-top: var(--spacing-md);
+}
+
+/* Login animation */
+@keyframes loginPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 200, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 255, 0);
+  }
+}
+
+.login-form .btn-primary {
+  animation: loginPulse 2s infinite;
+}
+
+/* Network background */
+.network-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure the login container is above the network background */
+.app-container {
+  position: relative;
+  z-index: 1;
+}
+

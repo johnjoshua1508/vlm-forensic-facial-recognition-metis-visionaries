@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1 class="page-title">System <span class="highlight">Dashboard</span></h1>
+    <p class="page-subtitle">Welcome back, {{ current_user.username }}</p>
+</div>
+
+<div class="dashboard-stats">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="stat-content">
+            <h3 class="stat-value">{{ stats.total_subjects }}</h3>
+            <p class="stat-label">Total Subjects</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-database"></i>
+        </div>
+        <div class="stat-content">
+            <h3 class="stat-value">{{ stats.index_size }}</h3>
+            <p class="stat-label">Index Size</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-microchip"></i>
+        </div>
+        <div class="stat-content">
+            <h3 class="stat-value">{{ stats.device }}</h3>
+            <p class="stat-label">Processing Device</p>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-actions">
+    <h2 class="section-title">Quick <span class="highlight">Actions</span></h2>
+    
+    <div class="action-cards">
+        <a href="{{ url_for('search') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3 class="action-title">Search Database</h3>
+            <p class="action-description">
+                Search for subjects using text, images, or both
+            </p>
+        </a>
+        
+        <a href="{{ url_for('add_subject') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-user-plus"></i>
+            </div>
+            <h3 class="action-title">Add New Subject</h3>
+            <p class="action-description">
+                Add a new subject to the database
+            </p>
+        </a>
+        
+        <a href="{{ url_for('remove_subject') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-user-minus"></i>
+            </div>
+            <h3 class="action-title">Remove Subject</h3>
+            <p class="action-description">
+                Remove a subject from the database
+            </p>
+        </a>
+        
+        <a href="{{ url_for('evaluation') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="action-title">Evaluate System</h3>
+            <p class="action-description">
+                Measure system performance with metrics
+            </p>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
+

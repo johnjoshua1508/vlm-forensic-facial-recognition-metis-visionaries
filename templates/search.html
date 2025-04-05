@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Search - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="search-header">
+    <h1 class="page-title">Multi-Modal <span class="highlight">Search</span></h1>
+    <p class="page-subtitle">Search the database using text, images, or both</p>
+</div>
+
+<div class="search-tabs">
+    <div class="tab-buttons">
+        <button class="tab-button active" data-tab="text">
+            <i class="fas fa-font"></i> Text Search
+        </button>
+        <button class="tab-button" data-tab="image">
+            <i class="fas fa-image"></i> Image Search
+        </button>
+        <button class="tab-button" data-tab="combined">
+            <i class="fas fa-layer-group"></i> Combined Search
+        </button>
+    </div>
+    
+    <div class="tab-content">
+        <!-- Text Search Tab -->
+        <div class="tab-pane active" id="text-tab">
+            <form method="POST" action="{{ url_for('search') }}" class="search-form">
+                <input type="hidden" name="search_type" value="text">
+                
+                <div class="form-group">
+                    <label for="text_query">
+                        <i class="fas fa-font"></i> Text Description
+                    </label>
+                    <textarea id="text_query" name="text_query" rows="4" placeholder="Example: A tall black male with brown eyes" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="top_k">
+                        <i class="fas fa-list-ol"></i> Number of Results
+                    </label>
+                    <input type="range" id="top_k" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="threshold_text">
+                        <i class="fas fa-filter"></i> Search Threshold
+                    </label>
+                    <input type="range" id="threshold_text" name="threshold_text" min="50" max="300" step="5" value="{{ session.get('threshold_text', config.THRESHOLD_TEXT) }}" class="slider">
+                    <span class="slider-value">{{ session.get('threshold_text', config.THRESHOLD_TEXT) }}</span>
+                    <p class="form-hint">Lower values give more precise results, higher values return more matches</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search by Text
+                </button>
+            </form>
+        </div>
+        
+        <!-- Image Search Tab -->
+        <div class="tab-pane" id="image-tab">
+            <form method="POST" action="{{ url_for('search') }}" class="search-form" enctype="multipart/form-data">
+                <input type="hidden" name="search_type" value="image">
+                
+                <div class="form-group">
+                    <label for="image">
+                        <i class="fas fa-image"></i> Upload Image
+                    </label>
+                    <div class="file-upload">
+                        <input type="file" id="image" name="image" accept=".jpg,.jpeg,.png" required>
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview"></div>
+                    </div>
+                    <p class="form-hint">Upload an image with a clearly visible human face (front or side view)</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="top_k_image">
+                        <i class="fas fa-list-ol"></i> Number of Results
+                    </label>
+                    <input type="range" id="top_k_image" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="threshold_image">
+                        <i class="fas fa-filter"></i> Search Threshold
+                    </label>
+                    <input type="range" id="threshold_image" name="threshold_image" min="5" max="100" step="5" value="{{ session.get('threshold_image', config.THRESHOLD_IMAGE) }}" class="slider">
+                    <span class="slider-value">{{ session.get('threshold_image', config.THRESHOLD_IMAGE) }}</span>
+                    <p class="form-hint">Lower values give more precise results, higher values return more matches</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Search by Image
+                </button>
+            </form>
+        </div>
+        
+        <!-- Combined Search Tab -->
+        <div class="tab-pane" id="combined-tab">
+            <form method="POST" action="{{ url_for('search') }}" class="search-form" enctype="multipart/form-data">
+                <input type="hidden" name="search_type" value="combined">
+                
+                <div class="form-group">
+                    <label for="text_query_combined">
+                        <i class="fas fa-font"></i> Text Description (Optional)
+                    </label>
+                    <textarea id="text_query_combined" name="text_query" rows="4" placeholder="Example: A young woman with curly hair and bright eyes"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="image_combined">
+                        <i class="fas fa-image"></i> Upload Image (Optional)
+                    </label>
+                    <div class="file-upload">
+                        <input type="file" id="image_combined" name="image" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview"></div>
+                    </div>
+                    <p class="form-hint">At least one of text or image must be provided</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="top_k_combined">
+                        <i class="fas fa-list-ol"></i> Number of Results
+                    </label>
+                    <input type="range" id="top_k_combined" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="threshold_combined">
+                        <i class="fas fa-filter"></i> Search Threshold
+                    </label>
+                    <input type="range" id="threshold_combined" name="threshold_combined" min="10" max="200" step="5" value="{{ session.get('threshold_combined', config.THRESHOLD_COMBINED) }}" class="slider">
+                    <span class="slider-value">{{ session.get('threshold_combined', config.THRESHOLD_COMBINED) }}</span>
+                    <p class="form-hint">Lower values give more precise results, higher values return more matches</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Combined Search
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}
+

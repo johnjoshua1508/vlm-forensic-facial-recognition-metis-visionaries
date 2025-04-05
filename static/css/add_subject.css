@@ -1,0 +1,235 @@
+/* Add Subject Page Styles - Futuristic Theme */
+
+.add-subject-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.add-subject-form-container {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--glass-shadow);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-section {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing-lg);
+  color: var(--primary-color);
+  text-shadow: var(--neon-glow);
+}
+
+.section-title i {
+  color: var(--primary-color);
+}
+
+.image-upload-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.metadata-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: flex-end;
+  margin-top: var(--spacing-xl);
+}
+
+.file-upload {
+  position: relative;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+  text-align: center;
+  transition: all var(--transition-fast);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.file-upload:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--neon-glow);
+}
+
+.file-upload input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.file-upload-label i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-shadow: var(--neon-glow);
+}
+
+.file-preview {
+  margin-top: var(--spacing-md);
+  max-width: 100%;
+}
+
+.file-preview img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--neon-glow);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Add styles for the height and weight input groups */
+.height-input-group,
+.weight-input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.height-input-group {
+  gap: var(--spacing-sm);
+}
+
+.height-feet,
+.height-inches {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.height-feet {
+  flex: 1;
+}
+
+.height-inches {
+  flex: 1;
+}
+
+.height-feet input,
+.height-inches input {
+  width: 100%;
+  padding-right: 40px; /* Make room for the unit label */
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--light-color);
+  transition: all var(--transition-fast);
+}
+
+.weight-input-group input {
+  flex: 1;
+  padding-right: 50px; /* Make room for the unit label */
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--light-color);
+  transition: all var(--transition-fast);
+}
+
+.height-feet input:focus,
+.height-inches input:focus,
+.weight-input-group input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.height-feet input:hover,
+.height-inches input:hover,
+.weight-input-group input:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--neon-glow);
+}
+
+.weight-input-group {
+  position: relative;
+  width: 100%;
+}
+
+.unit-label {
+  position: absolute;
+  right: 12px;
+  color: var(--primary-color);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* Remove arrows from number inputs */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Improve dropdown styling to match the futuristic UI */
+select {
+  appearance: none;
+  background: var(--glass-bg)
+    url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300c8ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")
+    no-repeat right 10px center;
+  background-size: 16px;
+  padding-right: 40px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: var(--light-color);
+}
+
+select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 200, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+select option {
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  padding: 10px;
+}
+
+/* Add a glow effect on hover */
+select:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--neon-glow);
+}
+

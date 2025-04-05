@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="results-header">
+  <h1 class="page-title">Search <span class="highlight">Results</span></h1>
+</div>
+
+<div class="search-info-bar">
+  <div class="search-stats">
+    <div class="stat">
+      <i class="fas fa-user-check"></i>
+      <span>{{ results|length }} matches found</span>
+    </div>
+    <div class="stat">
+      <i class="fas fa-clock"></i>
+      <span>{{ search_time|round(3) }} seconds</span>
+    </div>
+  </div>
+  
+  {% if query_type == 'text' or query_type == 'combined' and text_query %}
+    <div class="query-text-container">
+      <i class="fas fa-font"></i>
+      <div class="query-text">"{{ text_query }}"</div>
+    </div>
+  {% endif %}
+  
+  {% if query_type == 'image' or query_type == 'combined' and image_path %}
+    <div class="query-image-container">
+      <img src="{{ image_path }}" alt="Query Image">
+    </div>
+  {% endif %}
+</div>
+
+{% if results %}
+  <div class="results-grid-container">
+    <div class="results-grid">
+      {% for result in results %}
+        <div class="result-card" data-subject-id="{{ result.subject_id }}" data-distance="{{ result.distance|round(2) }}" data-metadata="{{ result.metadata|tojson }}">
+          <div class="result-image">
+            <img src="{{ url_for('static', filename='uploads/' + result.subject_id + '.jpg') }}" alt="Subject {{ result.subject_id }}">
+            <div class="scan-line"></div>
+          </div>
+          <div class="result-brief">
+            <div class="subject-id">{{ result.subject_id }}</div>
+            <div class="result-distance">
+              <span class="distance-value">{{ result.distance|round(2) }}</span>
+              <span class="distance-label">Distance</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<!-- Update the modal structure to match the screenshot layout -->
+<div class="subject-detail-modal" id="subjectDetailModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button class="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="detail-container">
+        <div class="detail-image">
+          <div class="detail-subject-id-container" id="modalSubjectId">SUBJECT ID: K03624</div>
+          <div class="detail-image-wrapper">
+            <img id="modalImage" src="/placeholder.svg" alt="Subject Image">
+            <div class="detail-distance">
+              <span id="modalDistance" class="distance-value"></span>
+              <span class="distance-label">Distance</span>
+            </div>
+          </div>
+        </div>
+        <div class="detail-info">
+          <div class="detail-grid">
+            <div class="detail-group">
+              <span class="detail-label">Sex</span>
+              <span id="modalSex" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Height</span>
+              <span id="modalHeight" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Weight</span>
+              <span id="modalWeight" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Hair</span>
+              <span id="modalHair" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Eyes</span>
+              <span id="modalEyes" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Race</span>
+              <span id="modalRace" class="detail-value"></span>
+            </div>
+            <div class="detail-group">
+              <span class="detail-label">Sex Offender</span>
+              <span id="modalSexOffender" class="detail-value"></span>
+            </div>
+          </div>
+          <div class="detail-offense">
+            <span class="detail-label">Offense</span>
+            <div id="modalOffense" class="detail-value offense-value"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+{% else %}
+  <div class="no-results">
+    <i class="fas fa-search"></i>
+    <h3>No matching results found</h3>
+    <p>Try adjusting your search criteria or thresholds</p>
+    <a href="{{ url_for('search') }}" class="btn btn-primary">
+      <i class="fas fa-arrow-left"></i> Back to Search
+    </a>
+  </div>
+{% endif %}
+
+<div class="results-actions">
+  <a href="{{ url_for('search') }}" class="btn btn-primary">
+    <i class="fas fa-search"></i> New Search
+  </a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/results.js') }}"></script>
+{% endblock %}
+

@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block title %}Forensic Face Recognition System - Home{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+<div class="hero-content">
+    <h1 class="hero-title">Next-Generation <span class="highlight">Forensic</span> Face Recognition</h1>
+    <p class="hero-subtitle">Powered by <span class="highlight-pulse">Vision-Language Models</span> - The Future of AI</p>
+    <div class="hero-description">
+        <p>Breakthrough technology that combines visual perception with natural language understanding for unprecedented search capabilities and accuracy in forensic identification.</p>
+    </div>
+    <div class="hero-buttons">
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            <i class="fas fa-tachometer-alt"></i> Access Dashboard
+            <span class="btn-glow"></span>
+        </a>
+        {% else %}
+        <a href="{{ url_for('login') }}" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Enter Secure System
+            <span class="btn-glow"></span>
+        </a>
+        <a href="#features" class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-info-circle"></i> Discover Capabilities
+        </a>
+        {% endif %}
+    </div>
+</div>
+<div class="hero-image">
+  <div class="tech-rings">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+  </div>
+  <div class="ai-face-container">
+      <img src="{{ url_for('static', filename='images/ai-face.png') }}" alt="AI Face" class="ai-face-image">
+  </div>
+</div>
+
+</div>
+
+<div id="features" class="features-section">
+<h2 class="section-title">Advanced <span class="highlight">VLM Technology</span></h2>
+<p class="section-subtitle">Leveraging cutting-edge AI to revolutionize forensic identification</p>
+
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-brain"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Vision-Language Models</h3>
+            <p class="feature-description">
+                Unified neural network architecture that processes both visual and textual information in the same semantic space, enabling cross-modal search capabilities.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-search"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Multi-Modal Search</h3>
+            <p class="feature-description">
+                Search using natural language descriptions, image uploads, or a powerful combination of both for unprecedented flexibility and accuracy.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-database"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Vector Database</h3>
+            <p class="feature-description">
+                FAISS vector database enables lightning-fast similarity search across large datasets with optimized indexing for real-time results.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-user-check"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Advanced Face Detection</h3>
+            <p class="feature-description">
+                Multi-angle face detection with frontal and profile recognition capabilities ensures high-quality results even with partial views.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Real-time Processing</h3>
+            <p class="feature-description">
+                Advanced GPU acceleration and optimized algorithms deliver instantaneous results, enabling rapid identification in time-critical scenarios.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="feature-content">
+            <h3 class="feature-title">Secure Authentication</h3>
+            <p class="feature-description">
+                Military-grade encryption and comprehensive audit trails ensure data integrity and compliance with forensic evidence standards.
+            </p>
+        </div>
+        <div class="feature-glow"></div>
+    </div>
+</div>
+</div>
+
+<div class="vlm-advantage-section">
+<div class="advantage-content">
+    <h2 class="section-title">The <span class="highlight">VLM Advantage</span></h2>
+    <p class="section-subtitle">Why Vision-Language Models represent the future of forensic identification</p>
+    
+    <div class="advantage-grid">
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-comment-alt"></i></div>
+            <div class="advantage-text">
+                <h3>Natural Language Queries</h3>
+                <p>Search using everyday language descriptions like "male with beard and glasses" instead of technical parameters.</p>
+            </div>
+        </div>
+        
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="advantage-text">
+                <h3>Cross-Modal Understanding</h3>
+                <p>System understands the relationship between visual features and language descriptions in a unified way.</p>
+            </div>
+        </div>
+        
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="advantage-text">
+                <h3>Higher Accuracy</h3>
+                <p>Combining visual and textual information leads to more precise identification and fewer false positives.</p>
+            </div>
+        </div>
+        
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-bolt"></i></div>
+            <div class="advantage-text">
+                <h3>Faster Results</h3>
+                <p>Advanced neural architecture and optimized vector search delivers results in milliseconds, not minutes.</p>
+            </div>
+        </div>
+        
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-globe"></i></div>
+            <div class="advantage-text">
+                <h3>Language Agnostic</h3>
+                <p>Works across multiple languages and dialects, enabling global deployment with consistent performance.</p>
+            </div>
+        </div>
+        
+        <div class="advantage-item">
+            <div class="advantage-icon"><i class="fas fa-fingerprint"></i></div>
+            <div class="advantage-text">
+                <h3>Forensic Reliability</h3>
+                <p>Meets strict forensic standards with transparent confidence scoring and detailed match explanations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="how-it-works-section">
+<h2 class="section-title">How It <span class="highlight">Works</span></h2>
+<p class="section-subtitle">A seamless workflow powered by advanced AI</p>
+
+<div class="workflow-steps">
+  <div class="workflow-step">
+      <div class="step-number">1</div>
+      <div class="step-content">
+          <h3 class="step-title">Input Query</h3>
+          <p class="step-description">
+              Enter a text description, upload an image, or use both to find matching subjects with unprecedented flexibility.
+          </p>
+      </div>
+  </div>
+  
+  <div class="workflow-step">
+      <div class="step-number">2</div>
+      <div class="step-content">
+          <h3 class="step-title">Neural Processing</h3>
+          <p class="step-description">
+              The VLM neural network converts your query into a high-dimensional vector representation in a unified semantic space.
+          </p>
+      </div>
+  </div>
+  
+  <div class="workflow-step">
+      <div class="step-number">3</div>
+      <div class="step-content">
+          <h3 class="step-title">Vector Search</h3>
+          <p class="step-description">
+              FAISS quickly finds the most similar vectors in the database using optimized nearest-neighbor algorithms.
+          </p>
+      </div>
+  </div>
+  
+  <div class="workflow-step">
+      <div class="step-number">4</div>
+      <div class="step-content">
+          <h3 class="step-title">Results Analysis</h3>
+          <p class="step-description">
+              Review matching subjects with detailed metadata, similarity scores, and confidence ratings.
+          </p>
+      </div>
+  </div>
+</div>
+</div>
+
+<div class="cta-section">
+<div class="cta-content">
+    <h2>Experience the Future of Forensic Identification</h2>
+    <p>Our system combines the latest advancements in artificial intelligence to deliver unprecedented accuracy and flexibility.</p>
+    {% if current_user.is_authenticated %}
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-large">
+        <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+        <span class="btn-glow"></span>
+    </a>
+    {% else %}
+    <a href="{{ url_for('login') }}" class="btn btn-primary btn-large">
+        <i class="fas fa-sign-in-alt"></i> Access the System
+        <span class="btn-glow"></span>
+    </a>
+    {% endif %}
+</div>
+<div class="cta-particles" id="particles-js"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+

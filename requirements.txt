@@ -1,0 +1,15 @@
+flask==2.3.3
+pymongo==4.5.0
+torch==2.0.1
+torchvision==0.15.2
+clip @ git+https://github.com/openai/CLIP.git
+faiss-cpu==1.7.4
+numpy==1.24.3
+opencv-python==4.8.0.76
+Pillow==10.0.0
+python-dotenv==1.0.0
+Werkzeug==2.3.7
+flask-wtf==1.2.1
+flask-login==0.6.2
+bcrypt==4.0.1
+pandas

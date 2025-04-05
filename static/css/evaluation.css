@@ -1,0 +1,192 @@
+/* Evaluation Page Styles - Futuristic Theme */
+
+.evaluation-header {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .evaluation-tabs {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--glass-shadow);
+    overflow: hidden;
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .tab-buttons {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .tab-button {
+    flex: 1;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: none;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    letter-spacing: 0.5px;
+  }
+  
+  .tab-button.active {
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
+  }
+  
+  .tab-button.active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-gradient);
+    box-shadow: var(--neon-glow);
+  }
+  
+  .tab-button:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .tab-button i {
+    margin-right: var(--spacing-sm);
+  }
+  
+  .tab-content {
+    padding: var(--spacing-xl);
+  }
+  
+  .tab-pane {
+    display: none;
+  }
+  
+  .tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .evaluation-form {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .evaluation-results {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: var(--spacing-xl);
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .metrics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .metric-card {
+    background: rgba(0, 200, 255, 0.05);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    transition: all var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neon-glow);
+  }
+  
+  .metric-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: var(--spacing-lg);
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: var(--neon-glow);
+  }
+  
+  .metric-content {
+    flex: 1;
+  }
+  
+  .metric-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
+  }
+  
+  .metric-label {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .results-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .details-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--primary-color);
+  }
+  
+  .details-section h3 i {
+    color: var(--primary-color);
+    text-shadow: var(--neon-glow);
+  }
+  
+  .details-section p {
+    background: rgba(0, 200, 255, 0.05);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    word-break: break-all;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--light-color);
+  }
+  
+  

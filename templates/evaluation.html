@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluation - Forensic Face Recognition System{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/evaluation.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="evaluation-header">
+    <h1 class="page-title">System <span class="highlight">Evaluation</span></h1>
+    <p class="page-subtitle">Measure system performance with precision, recall, and mean average precision</p>
+</div>
+
+<div class="evaluation-tabs">
+    <!-- Update the tab buttons to include combined tab -->
+    <div class="tab-buttons">
+        <button class="tab-button {% if not eval_type or eval_type == 'text' %}active{% endif %}" data-tab="text">
+            <i class="fas fa-font"></i> Text Evaluation
+        </button>
+        <button class="tab-button {% if eval_type == 'image' %}active{% endif %}" data-tab="image">
+            <i class="fas fa-image"></i> Image Evaluation
+        </button>
+        <button class="tab-button {% if eval_type == 'combined' %}active{% endif %}" data-tab="combined">
+            <i class="fas fa-layer-group"></i> Combined Evaluation
+        </button>
+    </div>
+    
+    <div class="tab-content">
+        <!-- Text Evaluation Tab -->
+        <div class="tab-pane {% if not eval_type or eval_type == 'text' %}active{% endif %}" id="text-tab">
+            <form method="POST" action="{{ url_for('evaluation') }}" class="evaluation-form">
+                <input type="hidden" name="eval_type" value="text">
+                
+                <div class="form-group">
+                    <label for="text_query">
+                        <i class="fas fa-font"></i> Text Query
+                    </label>
+                    <textarea id="text_query" name="text_query" rows="4" placeholder="Enter a text query to evaluate" required>{{ text_query if text_query else '' }}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ground_truth">
+                        <i class="fas fa-check-circle"></i> Ground Truth IDs
+                    </label>
+                    <input type="text" id="ground_truth" name="ground_truth" placeholder="Enter comma-separated subject IDs" value="{{ ground_truth if ground_truth else '' }}" required>
+                    <p class="form-hint">Enter the IDs of subjects that should match this query, separated by commas</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="top_k">
+                        <i class="fas fa-list-ol"></i> Number of Results (k)
+                    </label>
+                    <input type="range" id="top_k" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i> Evaluate
+                </button>
+            </form>
+        </div>
+        
+        <!-- Image Evaluation Tab -->
+        <div class="tab-pane {% if eval_type == 'image' %}active{% endif %}" id="image-tab">
+            <form method="POST" action="{{ url_for('evaluation') }}" class="evaluation-form" enctype="multipart/form-data">
+                <input type="hidden" name="eval_type" value="image">
+                
+                <div class="form-group">
+                    <label for="eval_image">
+                        <i class="fas fa-image"></i> Upload Image
+                    </label>
+                    <div class="file-upload">
+                        <input type="file" id="eval_image" name="eval_image" accept=".jpg,.jpeg,.png" required>
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview">
+                            {% if image_path %}
+                                <img src="{{ image_path }}" alt="Evaluation Image">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ground_truth_image">
+                        <i class="fas fa-check-circle"></i> Ground Truth IDs
+                    </label>
+                    <input type="text" id="ground_truth_image" name="ground_truth" placeholder="Enter comma-separated subject IDs" value="{{ ground_truth if ground_truth else '' }}" required>
+                    <p class="form-hint">Enter the IDs of subjects that should match this image, separated by commas</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="top_k_image">
+                        <i class="fas fa-list-ol"></i> Number of Results (k)
+                    </label>
+                    <input type="range" id="top_k_image" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i> Evaluate
+                </button>
+            </form>
+        </div>
+
+        <!-- Add a combined evaluation tab -->
+        <div class="tab-pane {% if eval_type == 'combined' %}active{% endif %}" id="combined-tab">
+            <form method="POST" action="{{ url_for('evaluation') }}" class="evaluation-form" enctype="multipart/form-data">
+                <input type="hidden" name="eval_type" value="combined">
+        
+                <div class="form-group">
+                    <label for="text_query_combined">
+                        <i class="fas fa-font"></i> Text Query (Optional)
+                    </label>
+                    <textarea id="text_query_combined" name="text_query" rows="4" placeholder="Enter a text query to evaluate">{{ text_query if text_query else '' }}</textarea>
+                </div>
+        
+                <div class="form-group">
+                    <label for="eval_image_combined">
+                        <i class="fas fa-image"></i> Upload Image (Optional)
+                    </label>
+                    <div class="file-upload">
+                        <input type="file" id="eval_image_combined" name="eval_image" accept=".jpg,.jpeg,.png">
+                        <div class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Drag & drop or click to upload</span>
+                        </div>
+                        <div class="file-preview">
+                            {% if image_path and eval_type == 'combined' %}
+                                <img src="{{ image_path }}" alt="Evaluation Image">
+                            {% endif %}
+                        </div>
+                    </div>
+                    <p class="form-hint">At least one of text or image must be provided</p>
+                </div>
+        
+                <div class="form-group">
+                    <label for="ground_truth_combined">
+                        <i class="fas fa-check-circle"></i> Ground Truth IDs
+                    </label>
+                    <input type="text" id="ground_truth_combined" name="ground_truth" placeholder="Enter comma-separated subject IDs" value="{{ ground_truth if ground_truth else '' }}" required>
+                    <p class="form-hint">Enter the IDs of subjects that should match this query, separated by commas</p>
+                </div>
+        
+                <div class="form-group">
+                    <label for="top_k_combined">
+                        <i class="fas fa-list-ol"></i> Number of Results (k)
+                    </label>
+                    <input type="range" id="top_k_combined" name="top_k" min="1" max="50" value="5" class="slider">
+                    <span class="slider-value">5</span>
+                </div>
+        
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-chart-line"></i> Evaluate
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% if precision is defined and recall is defined and ap is defined %}
+<div class="evaluation-results">
+    <h2 class="section-title">Evaluation <span class="highlight">Results</span></h2>
+    
+    <div class="metrics-cards">
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="metric-content">
+                <h3 class="metric-value">{{ (precision * 100)|round(2) }}%</h3>
+                <p class="metric-label">Precision@{{ top_k|default(5) }}</p>
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="metric-content">
+                <h3 class="metric-value">{{ (recall * 100)|round(2) }}%</h3>
+                <p class="metric-label">Recall@{{ top_k|default(5) }}</p>
+            </div>
+        </div>
+        
+        <div class="metric-card">
+            <div class="metric-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="metric-content">
+                <h3 class="metric-value">{{ (ap * 100)|round(2) }}%</h3>
+                <p class="metric-label">Average Precision</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="results-details">
+        <div class="details-section">
+            <h3><i class="fas fa-check-circle"></i> Ground Truth IDs</h3>
+            <p>{{ ground_truth }}</p>
+        </div>
+        
+        <div class="details-section">
+            <h3><i class="fas fa-list"></i> Retrieved IDs</h3>
+            <p>{{ retrieved }}</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/evaluation.js') }}"></script>
+{% endblock %}
+

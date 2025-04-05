@@ -1,0 +1,72 @@
+/* Remove Subject Page Styles - Futuristic Theme */
+
+.remove-subject-header {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .remove-subject-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .warning-card {
+    background: rgba(239, 71, 111, 0.1);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xl);
+    border-left: 4px solid var(--danger-color);
+    box-shadow: 0 0 20px rgba(239, 71, 111, 0.2);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid rgba(239, 71, 111, 0.2);
+  }
+  
+  .warning-icon {
+    font-size: 2rem;
+    color: var(--danger-color);
+    margin-right: var(--spacing-lg);
+    text-shadow: 0 0 10px rgba(239, 71, 111, 0.5);
+  }
+  
+  .warning-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--danger-color);
+  }
+  
+  .warning-content p {
+    margin-bottom: 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .remove-subject-form {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: var(--glass-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--glass-shadow);
+    padding: var(--spacing-xl);
+  }
+  
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+  }
+  
+  .checkbox-text {
+    color: var(--danger-color);
+    font-weight: 500;
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+  }
+  
+  
