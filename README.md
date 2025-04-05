@@ -4,6 +4,10 @@
 
 This project implements a visual search engine that leverages Vision-Language Models (VLMs), specifically CLIP (Contrastive Language-Image Pre-training), to retrieve relevant images based on both textual queries and sample images. The system creates a shared embedding space for images and text, enabling powerful multi-modal search capabilities in a forensic context.
 
+## Demo Video
+
+[Watch the full project demonstration video](https://drive.google.com/file/d/1-2LyCa_B0XFaASE60v784zsb7qqojdwK/view?usp=drive_link)
+
 ## Problem Statement
 
 Traditional image search systems rely on manually tagged metadata or basic visual features, which are limited in their ability to understand semantic content. This project addresses this limitation by:
