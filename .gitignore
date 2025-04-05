@@ -1,6 +1,6 @@
 # Ignore large dataset
 idoc-mugshots/
-
+search_system_export_front_side/
 # Virtual environment
 venv/
 
