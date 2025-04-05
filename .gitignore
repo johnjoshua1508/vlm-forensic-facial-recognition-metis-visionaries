@@ -1,6 +1,7 @@
 # Ignore large dataset
 idoc-mugshots/
 search_system_export_front_side/
+search_system_export_front_side/search_system_export_front_side/faiss_index_final.bin
 # Virtual environment
 venv/
 
